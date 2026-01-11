@@ -1,0 +1,16 @@
+{
+    "name": "papp/shop",
+    "description": "Shop",
+    "license": "proprietary",
+    "type": "phpapp-module",
+    "keywords": ["phpapp", "phpapp-module", "shop"],
+    "require": {
+        "php": "^8.0",
+        "smarty/smarty": "^v4.5",
+		"papp/cdata": "^v2.12"
+    },
+    "prefer-stable": true,
+	"psr-4": {
+        "papp\\": "system/papp/"
+    }
+}

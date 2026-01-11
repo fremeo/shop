@@ -1,0 +1,40 @@
+<?php
+if($D['SEARCH']??null) {
+	$f['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['ID'] = ['Title','Sku','Description'];
+	$f['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['LANGUAGE']['W'][0]['Value']['LIKE%%'] = [$D['SEARCH']];
+	$C['CData']->get_object($dSearch,$f);
+	
+	$F['ARTICLE']['W'][0]['ID'] = array_keys((array)$dSearch['ARTICLE']['D']);
+	$F['ARTICLE']['W'][1]['ID'] = array_keys((array)$dSearch['ARTICLE']['ParentId']['D']);
+
+	#$D['ARTICLE']['PARENT_COUNT'] = count((array)$dSearch['ARTICLE']['ParentId']['D']);
+}
+
+#Vater auslesen
+
+$F = array_merge_recursive($F,($D['R']['F']??[]));
+
+$F['ARTICLE']['ATTRIBUTE']['LANGUAGE'] = [];
+$F['ARTICLE']['STOCK'] = [];
+$F['ARTICLE']['CUSTOMERGROUP'] = [];
+$F['ARTICLE']['W'][0]['ParentId']['='] = ''; #Filtere nach Parend und einzeln Artikel, keine Kinder
+$F['ARTICLE']['W'][0]['Active'] = '1';
+
+$F['ARTICLE']['L']['STEP'] = $D['_ARTICLE']['STEP'] = $_SESSION['D']['_ARTICLE']['STEP'] = $D['_STEP']??$_SESSION['D']['_ARTICLE']['STEP']??100;
+
+$C['CData']->get_object($D,$F);
+
+$D['ARTICLE']['_PARENT_COUNT'] = count((array)($D['ARTICLE']['D']??[]));#$D['ARTICLE']['COUNT'];
+$D['ARTICLE']['_PARENT_COUNT'] = $D['ARTICLE']['COUNT'];
+
+
+
+#Kinder auslesen
+if($D['ARTICLE']['D']??null) {
+	$F2['ARTICLE']['ATTRIBUTE']['LANGUAGE'] = [];
+	$F2['ARTICLE']['STOCK'] = [];
+	$F2['ARTICLE']['CUSTOMERGROUP'] = [];
+	$F2['ARTICLE']['W'][0]['ParentId'] = array_keys((array)$D['ARTICLE']['D']);
+	$C['CData']->get_object($D,$F2);
+}
+unset($F);
