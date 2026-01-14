@@ -34,6 +34,6 @@
 			{/foreach}
 			</tbody>
 		</table>
-		<button type="submit" class="btn btn-primary btn-sm">Save</button>
+		<button type="submit" class="btn btn-primary btn-sm">Save</button> <a href="?D[_PAGE]=admin__article.edit&R[ModuleId]=papp/shop&R[ACTION]=new" class="btn btn-primary btn-sm">NEW</a>
 	</form>
 {/block}

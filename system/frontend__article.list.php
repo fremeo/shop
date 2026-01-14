@@ -1,13 +1,27 @@
 <?php
 if($D['SEARCH']??null) {
 	$f['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['ID'] = ['Title','Sku','Description'];
-	$f['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['LANGUAGE']['W'][0]['Value']['LIKE%%'] = [$D['SEARCH']];
+	
+	$search = trim($D['SEARCH']); # Beispiel: $D['SEARCH'] = "kugel ventil edelstahl";
+	$terms = preg_split('/\s+/', $search); # Suchbegriffe anhand von Leerzeichen trennen
+	$count = count($terms);
+	
+	for ($i = 0; $i < $count; $i++) { 
+		$f['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['LANGUAGE']['W'][$i]['Value']['LIKE%%'] = $terms[$i];
+	}
+	
+	#$f['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['LANGUAGE']['W'][0]['Value']['LIKE%%'] = $D['SEARCH'];
 	$C['CData']->get_object($dSearch,$f);
 	
-	$F['ARTICLE']['W'][0]['ID'] = array_keys((array)$dSearch['ARTICLE']['D']);
-	$F['ARTICLE']['W'][1]['ID'] = array_keys((array)$dSearch['ARTICLE']['ParentId']['D']);
+	#Filter agiere auf Parent und Kinder 
+	$F['ARTICLE']['W'][0]['ID'] = array_merge( array_keys((array)($dSearch['ARTICLE']['D']??[]))
+		,array_keys((array)($dSearch['ARTICLE']['ParentId']['D']??[]))
+	 );
+	 
+	#Kategorie bzw. vorab gesetzten Filter berücksichtigen
+	#$F['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['ID'] = $R['F']['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['ID'];
+	#$F['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['Value'] = $R['F']['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['Value'];
 
-	#$D['ARTICLE']['PARENT_COUNT'] = count((array)$dSearch['ARTICLE']['ParentId']['D']);
 }
 
 #Vater auslesen
@@ -25,7 +39,7 @@ $F['ARTICLE']['L']['STEP'] = $D['_ARTICLE']['STEP'] = $_SESSION['D']['_ARTICLE']
 $C['CData']->get_object($D,$F);
 
 $D['ARTICLE']['_PARENT_COUNT'] = count((array)($D['ARTICLE']['D']??[]));#$D['ARTICLE']['COUNT'];
-$D['ARTICLE']['_PARENT_COUNT'] = $D['ARTICLE']['COUNT'];
+#$D['ARTICLE']['_PARENT_COUNT'] = $D['ARTICLE']['COUNT'];
 
 
 

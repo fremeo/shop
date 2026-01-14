@@ -1,4 +1,5 @@
 {function name="form_artikle" kART=null ART=null}
+Artikel-ID: {$kART}
 <table class="table">
 			<thead>
 				<tr>
@@ -51,29 +52,37 @@
 {block name="inner_body"}
 	<form method="post">
 		<input type="hidden" name="D[ACTION]" value='save'>
+		
+		
 		{$SetLanguage = json_decode($D.SETTING.D['Language'].Value,true)}
-		
-		
-	{foreach from=$D.ARTICLE['ParentId'].D[NULL].ARTICLE.D key="kART" item="ART"}
-		
-		{form_artikle kART=$kART ART=$ART}
-			Kinder<br>
-
-		{foreach from=$D.ARTICLE['ParentId'].D[$kART].ARTICLE.D key="kVAR" item="VAR"}
+	
+	{if $D['R']['ACTION'] == 'new'}
+		<input type="hidden" name="D[ARTICLE][D][{$D['R']['Id']}][ParentId]" value=''>
+		<input type="hidden" name="D[_ID]" value='{$D['R']['Id']}'>
+		{form_artikle kART=$D['R']['Id'] ART=Null}
+	{else}
+	
+		{foreach from=$D.ARTICLE['ParentId'].D[NULL].ARTICLE.D key="kART" item="ART"}
 			
-			Variante: {$kVAR}
-			{if $VAR.ATTRIBUTE.D['Image'].Value}{$Pics = json_decode($VAR.ATTRIBUTE.D['Image'].Value,true)}
-			<picture> 
-				<source srcset="file/{$Pics[0]}_50x50.avif" type="image/avif"/>
-				<source srcset="file/{$Pics[0]}_50x50.webp" type="image/webp"/>
-				<img src="file/{$Pics[0]}_50x50.png">
-			</picture>
-			{/if}
-			{form_artikle kART=$kVAR ART=$VAR}
+			{form_artikle kART=$kART ART=$ART}
+				Kinder<br>
+
+			{foreach from=$D.ARTICLE['ParentId'].D[$kART].ARTICLE.D key="kVAR" item="VAR"}
+				
+				Variante: {$kVAR}
+				{if $VAR.ATTRIBUTE.D['Image'].Value}{$Pics = json_decode($VAR.ATTRIBUTE.D['Image'].Value,true)}
+				<picture> 
+					<source srcset="file/{$Pics[0]}_50x50.avif" type="image/avif"/>
+					<source srcset="file/{$Pics[0]}_50x50.webp" type="image/webp"/>
+					<img src="file/{$Pics[0]}_50x50.png">
+				</picture>
+				{/if}
+				{form_artikle kART=$kVAR ART=$VAR}
+				
+			{/foreach}
 			
 		{/foreach}
-		
-	{/foreach}
+	{/if}
 		<button type="submit" class="btn btn-primary btn-sm">Save</button>
 	</form>
 {/block}

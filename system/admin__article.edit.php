@@ -3,9 +3,9 @@
 if(($D['ACTION']??null) == 'save') {
 	$C['CData']->set_object($D);
 }
-
-else if(($D['ACTION']??null) == 'new') {
-	$D['ARTICLE']['D']['-new-'] = [];
+else if(($R['ACTION']??null) == 'new') {
+	$D['R']['Id'] = hash("crc32b", time());
+	$D['_ID'] = $D['R']['Id'];#Todo: verübergehend, bis $D_ID zur R[Id] wird.
 }
 
 $F['ARTICLE']['W'][0]['ID'] = $D['_ID'];
