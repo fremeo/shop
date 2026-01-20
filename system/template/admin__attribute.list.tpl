@@ -6,7 +6,7 @@
 	<div class="col-2">
 		<div class="nav flex-column nav-pills" >
 		{foreach from=$D.ATTRIBUTE_SET.D key="kATTS" item="ATTS"}
-			<a class="nav-link {if $kATTS == $D.P.ATTSETID}active{/if}" href="?D[_PAGE]=attribute.list&P[ATTSETID]={$kATTS}">{$ATTS.LANGUAGE.D['DE'].Title}</a>
+			<a class="nav-link {if $kATTS == $D.P.ATTSETID}active{/if}" href="?R[Page]=attribute.list&P[ATTSETID]={$kATTS}">{$ATTS.LANGUAGE.D['DE'].Title}</a>
 		{/foreach}
 		</div>
 	</div>

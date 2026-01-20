@@ -1,10 +1,15 @@
 <?php
 
 if(isset($D['Action']) && $D['Action'] == 'toBasket') {
+	$_akey = array_key_first($R['BASKET']['ARTICLE']['D']);
+	$_SESSION['BASKET']['ARTICLE']['D'][$_akey] = $R['BASKET']['ARTICLE']['D'][$_akey];
+	
+	/*
 	$_SESSION['D']['_BASKET']['ARTICLE']['D'][ $D['_ID'] ] = [
 		'Stock' => 1,
 		'Price' => 12.99,
 	];
+	*/
 }
 
  $F['ARTICLE']['W'][0]['ID'] = [$D['_ID']];

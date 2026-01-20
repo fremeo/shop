@@ -23,7 +23,7 @@
 					<td scope="row">{$c = current((array)$ACC.ADDRESS.D)}{$c['Company']}</td>
 					<td scope="row">{$c['FName']}{$c['LName']}</td>
 					<td scope="row">{count((array)$ACC.CUSTOMER.D)}</td>
-					<td scope="row"><a href="?D[_PAGE]=account.edit&D[_ID]={$kACC}">edit</a></td>
+					<td scope="row"><a href="?R[Page]=account.edit&D[_ID]={$kACC}">edit</a></td>
 				</tr>
 			{/foreach}
 			</tbody>

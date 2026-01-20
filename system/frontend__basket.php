@@ -1,8 +1,8 @@
 <?php
-if($D['SESSION']['BASKET']['ARTICLE']['D']) {
+if(($D['SESSION']['BASKET']['ARTICLE']['D']??null)) {
 	$F['ARTICLE']['W'][0]['ID'] = array_keys( $D['SESSION']['BASKET']['ARTICLE']['D']); #Lade Alle Artikel die im Warenkorb liegen
 	
-	$CData->get_object($d,$F); 
+	$C['CData']->get_object($d,$F); 
 	$F['ARTICLE']['W'][1]['ID'] = array_keys($d['ARTICLE']['ParentId']['D']); #Vater IDs hollen
 
 

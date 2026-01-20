@@ -1,4 +1,3 @@
-
 {block name="account_body"}
 	<form method="post">
 	{foreach from=$D.ACCOUNT.D key="kACC" item="ACC"}
@@ -9,4 +8,4 @@
 				]}
 	{/foreach}
 	</form>
-	{/block}
+{/block}

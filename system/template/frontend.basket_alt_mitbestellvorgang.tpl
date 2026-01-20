@@ -1,5 +1,5 @@
 
-{block name="body" prepend}
+{block name="inner_body" prepend}
 	<div class="container">
 	<form method="post">
 		<div class="row" id="basket">
@@ -9,7 +9,7 @@
 							
 						<div class="card">
 							<div class="card-header">
-								<i class="fas fa-receipt float-start"> Rechnungsadresse</i>
+								<i class="fas fa-receipt float-start"></i> Rechnungsadresse
 								<div class="float-end"><button type="button" onclick="$('#InvoiceAddressBox input').toggleClass('border-0 pe-auto');" class="btn btn-light btn-sm">edit</button></div>
 							</div>
 							<div class="card-body" id="InvoiceAddressBox">
@@ -46,7 +46,7 @@
 					<div class="col-12 col-sm-6">*}
 						<div class="card">
 							<div class="card-header">
-								<i class="fas fa-location-arrow"> Lieferadresse</i>
+								<i class="fas fa-location-arrow"></i>  Lieferadresse
 								<div class="float-end"><button type="button" onclick="$('#ShippingAddressBox input').toggleClass('border-0 pe-auto');" class="btn btn-light btn-sm">edit</button></div>
 							</div>
 							<div class="card-body" id="ShippingAddressBox">
