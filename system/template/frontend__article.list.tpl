@@ -113,6 +113,7 @@
 							<span class="text-dark fw-bold">{if $_Price}{if $_ab}ab {/if} {$_Price} €{/if} {*(1,55€/St)*}</span>
 						</div>
 						<div>
+						<a class="btn btn-primary btn-sm" href="{$D['SEO_URL']}?R[ACTION]=addMemo&D[ACCOUNT][D][{$D.SESSION.AccountId}][MEMO][D][A][ARTICLE][D][{$kART}][Active]=1">&#128270; in die Wunschliste</a>
 							<a class="btn btn-primary btn-sm" href="{$ART.ATTRIBUTE.D['Url'].LANGUAGE.D['DE'].Value}">&#128270; View</a>
 						</div>
 					</div>

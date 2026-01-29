@@ -149,13 +149,13 @@
 						
 						<div class="input-group">
 							<input type="button" value="-" class="btn btn-sm btn-outline-secondary" data-field="quantity">
-							<input type="number" step="1" max="10" value="1" name="R[BASKET][ARTICLE][D][{$kART}][addStock]" class="form-control-sm">
+							<input type="number" step="1" max="10" value="1" name="R[BASKET][ORDER][D][{$D.SESSION.OrderId}][ARTICLE][D][{$kART}][Stock]" class="form-control-sm">
 							<input type="button" value="+" class="btn btn-sm btn-outline-secondary" data-field="quantity">
 						</div>
 
 						<div class="mt-3 row justify-content-start g-2 align-items-center">
-							<input name="D[Action]" value="toBasket">
-								<button type="submit" class="btn btn-warning" onclick="wp.ajax({ 'url' : '{$D.BasePath}io?D[ACTION]=set_basket', 'data' : $('form').serialize() });">
+								{input p=['name'=> 'R[ACTION]', 'value'=> 'addToBasket', 'type' => 'hidden']}
+								<button type="submit" class="btn btn-warning">
 									<i class="fas fa-shopping-basket"></i> in den Warenkorb
 								</button>
 							

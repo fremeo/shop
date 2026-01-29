@@ -1,5 +1,5 @@
 {block name="navigation_top" prepend}
-	<a href="basket" title="Basket" class="p-2"><i class="fas fa-shopping-basket">{count((array)$D['SESSION']['BASKET']['ARTICLE']['D'])}</i></a>
+	<a href="basket" title="Basket" class="p-2"><i class="fas fa-shopping-basket">{count((array)$D['SESSION']['BASKET']['ORDER']['D'][ $D['SESSION']['OrderId'] ]['ARTICLE']['D'])}</i></a>
 	
 	{*if $D.SESSION.UserId}
 	{else}	

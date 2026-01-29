@@ -18,11 +18,11 @@
 							<th scope="col">MwSt</th>
 							<th scope="col">Einzelpreis</th>
 							<th scope="col" style="width:10%">Anzahl</th>
-							<th scope="col" style="width:10%">Preis</th>
+							<th scope="col" class="text-center" style="width:10%">Preis</th>
 						</tr>
 					</thead>
 					<tbody class="table-group-divider">
-						{foreach from=$D.SESSION.BASKET.ARTICLE.D key="kART" item="ART" name="ART"}
+						{foreach from=$D.SESSION.BASKET.ORDER.D[ $D.SESSION.OrderId ].ARTICLE.D key="kART" item="ART" name="ART"}
 						<tr>
 							<th scope="row">{$smarty.foreach.ART.iteration}</th>
 							<td>{input p=['value' => 1, 'type' => 'checkbox']}</td>
@@ -48,10 +48,13 @@
 							{/if}
 							</td>
 							<td>19%</td>
-							<td>{$D.ARTICLE.D[$kART].CUSTOMERGROUP.D[0].Price|string_format:"%.2f"} €</td>
-							<td>{input p=['name' => "D[_BASKET][ARTICLE][D][{$kART}][Stock]", 'onchange'=>"wp.ajax({ 'url' : '{$D.BasePath}io?D[ACTION]=set_basket', 'data' : $('form').serialize() });", 'value' => $ART.Stock ]}</td>
+							<td class="text-end">{$D.ARTICLE.D[$kART].CUSTOMERGROUP.D[0].Price|string_format:"%.2f"} €</td>
+							<td>{input p=['name' => "R[BASKET][ORDER][D][{$D.SESSION.OrderId}][ARTICLE][D][{$kART}][Stock]", 'onchange'=>"wp.ajax({ 'url' : '{$D.BasePath}io?D[ACTION]=set_basket', 'data' : $('form').serialize() });", 'value' => $ART.Stock ]}
+							{input p=['type' => 'hidden', 'name' => 'R[ACTION]', 'value'=> 'addToBasket']}
+							<button type="submit">Save</button>
+							</td>
 							{*<td>{($D.ARTICLE.D[$kART].ATTRIBUTE.D['Price'].Value*$ART.Stock)|string_format:"%.2f"} €</td>*}
-							<td>{($D.ARTICLE.D[$kART].CUSTOMERGROUP.D[0].Price*$ART.Stock)|string_format:"%.2f"} €</td>
+							<td class="text-end">{($D.ARTICLE.D[$kART].CUSTOMERGROUP.D[0].Price*$ART.Stock)|string_format:"%.2f"} €</td>
 						</tr>
 						{$_SUM = $_SUM + $D.ARTICLE.D[$kART].CUSTOMERGROUP.D[0].Price*$ART.Stock}
 						{/foreach}
@@ -65,17 +68,17 @@
 							<td></td>
 							<td></td>
 							<td></td>
-							<td>{($_SUM+5.99)|string_format:"%.2f"}€</td>
+							<td class="text-end">{($_SUM+5.99)|string_format:"%.2f"} €</td>
 						</tr>
 					</tfoot>
 				</table>
 				
-				{if count((array)$D.SESSION.BASKET.ARTICLE.D) > 0}
+				{if count((array)$D.SESSION.BASKET.ORDER.D[$D.SESSION.OrderId].ARTICLE.D) > 0}
 					{*
 				<button type="button" class="btn btn-warning" onclick="wp.ajax({ 'url' : '{$D.BasePath}io?D[ACTION]=send_basket2Mail', 'data' : $('form').serialize() }); alert('Vielen Dank für Ihre Anfrage, wir werden uns bei Ihen dann melden.');location.href = '{$D.BasePath}'; ">Anfragen</button>
 				*}
-				<div style="float:Right;">
-				<button type="button" class="btn btn-warning" onclick="wp.ajax({ 'div' : 'OrderNr', 'url' : '{$D.BasePath}io?D[ACTION]=buy_basket', 'data' : $('form').serialize() });$('#basket').hide();$('#thankyou').show(); ">Zur Kasse</button>
+				<div class="text-end">
+					<a href="?R[Page]=frontend__checkout_step1&R[ModuleId]=papp/shop" class="btn btn-warning btn-outline-primery">Zur Kasse</a>
 				</div>
 				{else}
 					<div class="alert alert-danger" role="alert">Bitte fügen Sie Artikel dem Warenkorb hinzu!</div>

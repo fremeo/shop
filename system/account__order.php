@@ -1,3 +1,4 @@
 <?php
 $F['ACCOUNT']['W'][0]['ID'] = $D['SESSION']['AccountId']??null;
-$F['ACCOUNT']['ORDER'] = [];
+$F['ACCOUNT']['ORDER']['ARTICLE'] = [];
+$F['ACCOUNT']['ORDER']['DELIVERY']['ARTICLE'] = [];
