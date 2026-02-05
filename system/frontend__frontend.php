@@ -8,8 +8,8 @@ switch($R['ACTION']??null) {
 	break;
 	case 'addToBasket':
 
-	if(!$_SESSION['OrderId']) {
-		$_SESSION['OrderId'] = hash("crc32b", $_SESSION['UserId'].hrtime(true));
+	if(!($_SESSION['OrderId']??null)) {
+		$_SESSION['OrderId'] = hash("crc32b", hrtime(true));
 	}
 
 	$C['CShop']->updateBasket($R);
@@ -29,7 +29,7 @@ switch($R['ACTION']??null) {
 
 	unset($_SESSION['OrderId']);
 	unset($_SESSION['BASKET']);
-	$_SESSION['OrderId'] = hash("crc32b", $_SESSION['UserId'].hrtime(true));#Neue Warenkorb ID zuweisen
+	$_SESSION['OrderId'] = hash("crc32b", hrtime(true));#Neue Warenkorb ID zuweisen
 
 	$D['SESSION'] = $_SESSION;
 	break;

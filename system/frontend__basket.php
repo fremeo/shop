@@ -1,6 +1,6 @@
 <?php
 
-if(($D['SESSION']['BASKET']['ORDER']['D'][ $D['SESSION']['OrderId'] ]['ARTICLE']['D']??null)) {
+if(($D['SESSION']['BASKET']['ORDER']['D'][ ($D['SESSION']['OrderId']??null) ]['ARTICLE']['D']??null)) {
 	$F['ARTICLE']['W'][0]['ID'] = array_keys( $D['SESSION']['BASKET']['ORDER']['D'][ $D['SESSION']['OrderId'] ]['ARTICLE']['D']); #Lade Alle Artikel die im Warenkorb liegen
 	
 	$C['CData']->get_object($d,$F); 

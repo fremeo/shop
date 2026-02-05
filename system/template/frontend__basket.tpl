@@ -68,7 +68,7 @@
 							<td></td>
 							<td></td>
 							<td></td>
-							<td class="text-end">{($_SUM+5.99)|string_format:"%.2f"} €</td>
+							<td class="text-end">{($_SUM)|string_format:"%.2f"} €</td>
 						</tr>
 					</tfoot>
 				</table>

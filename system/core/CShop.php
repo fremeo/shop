@@ -7,6 +7,7 @@ class CShop
 
     public function __construct($cdata)
     {
+
         $this->cdata = $cdata;
     }
 	/*
