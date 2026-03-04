@@ -24,6 +24,18 @@
 						</ul>
 					</div>
 				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link" data-bs-toggle="collapse" href="#shop_submenu20" aria-expanded="false">
+						<i class="fas fa-user"></i><span> Kunden</span>
+					</a>
+					<div class="collapse ps-3" id="shop_submenu20">
+						<ul class="nav flex-column">
+							{*<li class="nav-item"><a class="nav-link" href="?R[Page]=account.group.list&R[ModuleId]=papp/shop#shop_submenu20"><i class="fas fa-users-cog"></i> Kunden Gruppe</a></li>*}
+							<li class="nav-item"><a class="nav-link" href="?R[Page]=admin__account.list&R[ModuleId]=papp/shop#shop_submenu20"><i class="fas fa-user-circle"></i> Kunden</a></li>
+						</ul>
+					</div>
+				</li>
 
 			</ul>
 		</div>

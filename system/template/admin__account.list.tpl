@@ -1,4 +1,4 @@
-{block name="body"}
+{block name="inner_body"}
 	<form method="post">
 		<input type="hidden" name="D[ACTION]" value='save'>
 		
