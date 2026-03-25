@@ -3,7 +3,7 @@
 if(($D['SESSION']['BASKET']['ORDER']['D'][ $D['SESSION']['OrderId'] ]['ARTICLE']['D']??null)) {
 	$F['ARTICLE']['W'][0]['ID'] = array_keys( $D['SESSION']['BASKET']['ORDER']['D'][ $D['SESSION']['OrderId'] ]['ARTICLE']['D']); #Lade Alle Artikel die im Warenkorb liegen
 	
-	$C['CData']->get_object($d,$F); 
+	$C['papp~shop']['CData']->get_object($d,$F); 
 	$F['ARTICLE']['W'][1]['ID'] = array_keys($d['ARTICLE']['ParentId']['D']); #Vater IDs hollen
 
 

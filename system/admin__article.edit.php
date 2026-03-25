@@ -16,3 +16,6 @@ $F['ARTICLE']['CUSTOMERGROUP'] = [];
 $F['ATTRIBUTE']['LANGUAGE'] = [];
 ###$C['CData']->get_object($D,$F);
 
+$C['papp~shop']['CData']->get_object($D,$F);
+unset($F['ARTICLE']);
+unset($F['ATTRIBUTE']);

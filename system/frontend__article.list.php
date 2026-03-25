@@ -36,7 +36,7 @@ $F['ARTICLE']['W'][0]['Active'] = '1';
 
 $F['ARTICLE']['L']['STEP'] = $D['_ARTICLE']['STEP'] = $_SESSION['D']['_ARTICLE']['STEP'] = $D['_STEP']??$_SESSION['D']['_ARTICLE']['STEP']??100;
 
-$C['CData']->get_object($D,$F);
+$C['papp~shop']['CData']->get_object($D,$F);
 
 $D['ARTICLE']['_PARENT_COUNT'] = count((array)($D['ARTICLE']['D']??[]));#$D['ARTICLE']['COUNT'];
 #$D['ARTICLE']['_PARENT_COUNT'] = $D['ARTICLE']['COUNT'];
@@ -49,6 +49,6 @@ if($D['ARTICLE']['D']??null) {
 	$F2['ARTICLE']['STOCK'] = [];
 	$F2['ARTICLE']['CUSTOMERGROUP'] = [];
 	$F2['ARTICLE']['W'][0]['ParentId'] = array_keys((array)$D['ARTICLE']['D']);
-	$C['CData']->get_object($D,$F2);
+	$C['papp~shop']['CData']->get_object($D,$F2);
 }
-unset($F);
+#unset($F);

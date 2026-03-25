@@ -96,6 +96,19 @@ $Pattern['ARTICLE']['D']['ATTRIBUTE']['D']['LANGUAGE'] = [ #<-- Todo: Pfad veral
 ];
 
 
+$Pattern['ACCOUNT']['D']['ADDRESS'] = [
+	'Active'		=> ['Type' => 'checkbox'],
+	'FName'			=> ['Type' => 'text'],
+	'LName'			=> ['Type' => 'text'],
+	'Street'		=> ['Type' => 'text'],
+	'HNumber'		=> ['Type' => 'text'],
+	'Postcode'		=> ['Type' => 'text'],
+	'City'			=> ['Type' => 'text'],
+	'CountryId'		=> ['Type' => 'id'], #isocode2
+	'Phone'			=> ['Type' => 'text'],
+	'Mail'			=> ['Type' => 'text'],
+];
+
 $Pattern['ACCOUNT']['D']['MEMO'] = [
 	'Active'		=> ['Type' => 'checkbox'],
 	'Name'			=> ['Type' => 'text'],
@@ -158,5 +171,31 @@ $Pattern['ACCOUNT']['D']['ORDER']['D']['DELIVERY']['D']['ARTICLE'] = [ #Versende
 	'Weight'		=> ['Type' => 'text'],
 ];
 
-$C['CData']->registerPattern($Pattern);
+#$C['CData']->registerPattern($Pattern);
 
+
+$C['papp~shop']['CData'] = new \papp\CData( [ 'DB' => ['FILENAME' => PROJECT_ROOT.'data/papp~shop/data.db', 'FILENAME_C' => PROJECT_ROOT.'data_c/papp~shop/data.db' ] ] );
+$C['papp~shop']['CData']->registerPattern($Pattern);
+
+/*
+$F['ATTRIBUTE_SET']['LANGUAGE'] = [];
+$F['ATTRIBUTE_SET']['ATTRIBUTE_GROUP']['LANGUAGE'] = [];
+$F['ATTRIBUTE_SET']['ATTRIBUTE_GROUP']['ATTRIBUTE']['PROPERTY']['LANGUAGE'] = [];
+$F['ATTRIBUTE']['PROPERTY']['LANGUAGE'] = [];
+$F['ATTRIBUTE']['LANGUAGE'] = [];
+$F['ARTICLE']['STOCK'] = [];
+$F['ARTICLE']['CUSTOMERGROUP']['ATTRIBUTE']['ITEM']['PROPERTY'] = [];
+$F['ARTICLE']['ATTRIBUTE']['ITEM']['PROPERTY']['LANGUAGE'] = [];
+$F['ARTICLE']['ATTRIBUTE']['LANGUAGE'] = [];
+$F['ACCOUNT']['MEMO']['ARTICLE'] = [];
+$F['ACCOUNT']['ORDER']['ARTICLE'] = [];
+$F['ACCOUNT']['ORDER']['DELIVERY']['ARTICLE'] = [];
+
+$F['ARTICLE']['ATTRIBUTE']['LANGUAGE'] = [];
+$F['ARTICLE']['STOCK'] = [];
+$F['ARTICLE']['CUSTOMERGROUP'] = [];
+$C['CData']->get_object($D1,$F); #Achtung: über diese Methode wurden Artikel Texte nicht ausgelesen!
+
+$C['papp~shop']['CData']->set_object($D1);
+
+*/

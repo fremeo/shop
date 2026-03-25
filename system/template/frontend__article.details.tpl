@@ -17,7 +17,7 @@
 									<picture> 
 										<source srcset="file/{$PIC}_500x500.avif" type="image/avif"/>
 										<source srcset="file/{$PIC}_500x500.webp" type="image/webp"/>
-										<img src="file/{$PIC}_500x500.jpg" class="d-block w-100" alt="{$ART.ATTRIBUTE.D['Title'].LANGUAGE.D['DE'].Value}"/>
+										<img src="file/{$PIC}_500x500.jpg" loading="lazy" class="d-block w-100" alt="{$ART.ATTRIBUTE.D['Title'].LANGUAGE.D['DE'].Value}"/>
 									</picture>
 								</div>
 							{/foreach}
@@ -92,7 +92,7 @@
 												<picture> 
 												<source srcset="file/{$AVA.Image}_100x100.avif" type="image/avif"/>
 												<source srcset="file/{$AVA.Image}_100x100.webp" type="image/webp"/>
-												<img src="file/{$AVA.Image}_100x100.jpg" class="d-block w-100" alt="{$ART.ATTRIBUTE.D['Title'].LANGUAGE.D['DE'].Value}"/>
+												<img src="file/{$AVA.Image}_100x100.jpg" loading="lazy" class="d-block w-100" alt="{$ART.ATTRIBUTE.D['Title'].LANGUAGE.D['DE'].Value}"/>
 												</picture>
 											{/if}
 											{$kAVA}
