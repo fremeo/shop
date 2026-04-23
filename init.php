@@ -2,7 +2,7 @@
 
 include_once(__dir__."/system/core/CShop.php");
 
-$C['CShop'] = new CShop($C['CData']);
+
 
 /*
 #Erweiterung der Admin Module um eigene Templates und PHP Dateien	
@@ -177,6 +177,7 @@ $Pattern['ACCOUNT']['D']['ORDER']['D']['DELIVERY']['D']['ARTICLE'] = [ #Versende
 $C['papp~shop']['CData'] = new \papp\CData( [ 'DB' => ['FILENAME' => PROJECT_ROOT.'data/papp~shop/data.db', 'FILENAME_C' => PROJECT_ROOT.'data_c/papp~shop/data.db' ] ] );
 $C['papp~shop']['CData']->registerPattern($Pattern);
 
+$C['CShop'] = new CShop($C['papp~shop']['CData']);
 /*
 $F['ATTRIBUTE_SET']['LANGUAGE'] = [];
 $F['ATTRIBUTE_SET']['ATTRIBUTE_GROUP']['LANGUAGE'] = [];

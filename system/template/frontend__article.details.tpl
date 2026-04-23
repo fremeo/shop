@@ -141,13 +141,16 @@
 					
 
 					<div class="bg-light rounded-2 p-2">
+					<a href="kontakt">Preis auf Anfrage</a>
+					{*
 						<div class="fs-5 mb-2" style="text-align:right;">
 							{if $ART.CUSTOMERGROUP.D['0'].RRPrice}<span class="text-decoration-line-through">{$ART.CUSTOMERGROUP.D['0'].RRPrice}</span>
 							{elseif $ART.ATTRIBUTE.D['RRPrice'].Value}UVP: {$ART.ATTRIBUTE.D['RRPrice'].Value} €{/if}
 							<span class="fs-3">{if $ART.CUSTOMERGROUP.D['0'].Price}{$ART.CUSTOMERGROUP.D['0'].Price} €{/if}</span>
 						</div>
-
+*}
 						{if !$ART.ATTRIBUTE.D['VarianteGroup'].Value}
+						{*
 						<div class="input-group">
 							<input type="button" value="-" class="btn btn-sm btn-outline-secondary" data-field="quantity">
 							<input type="number" step="1" max="10" value="1" name="R[BASKET][ORDER][D][{$D.SESSION.OrderId}][ARTICLE][D][{$kART}][Stock]" class="form-control-sm">
@@ -160,7 +163,7 @@
 								<button type="submit" class="btn btn-warning">
 									<i class="fas fa-shopping-basket"></i> in den Warenkorb
 								</button>
-						</div>
+						</div>*}
 						{/if}
 						{*
 						<div class="mt-3 row justify-content-start g-2 align-items-center">

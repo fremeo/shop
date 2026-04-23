@@ -1,7 +1,7 @@
 <?php
 
 if(($D['ACTION']??null) == 'save') {
-	$C['CData']->set_object($D); 
+	$C['papp~shop']['CData']->set_object($D); 
 }
 
 
