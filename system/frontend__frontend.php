@@ -4,7 +4,7 @@
 switch($R['ACTION']??null) {
 
 	case 'addMemo':
-	$C['papp~shop']['CData']->set_object($D);
+	$C['fremeo~shop']['CData']->set_object($D);
 	break;
 	case 'addToBasket':
 
@@ -12,7 +12,7 @@ switch($R['ACTION']??null) {
 		$_SESSION['OrderId'] = hash("crc32b", hrtime(true));
 	}
 
-	$C['papp~shop']['CShop']->updateBasket($R);
+	$C['fremeo~shop']['CShop']->updateBasket($R);
 	$D['SESSION'] = $_SESSION;
 
 	break;

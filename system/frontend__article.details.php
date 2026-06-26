@@ -1,7 +1,7 @@
 <?php
 $F['ARTICLE']['W'][0]['ID'] = [$D['_ID']];
 
-$C['papp~shop']['CData']->get_object($D,$F);
+$C['fremeo~shop']['CData']->get_object($D,$F);
 unset($F['ARTICLE']['W'][0]['ID']);
 
 foreach((array) $D['ARTICLE']['D'] AS $kART => $ART) {
@@ -27,6 +27,6 @@ $F['ARTICLE']['CUSTOMERGROUP'] = [];
 $F['ATTRIBUTE']['LANGUAGE'] = [];
 
 
-$C['papp~shop']['CData']->get_object($D,$F);
+$C['fremeo~shop']['CData']->get_object($D,$F);
 unset($F['ARTICLE']);
 unset($F['ATTRIBUTE']);

@@ -29,11 +29,11 @@
 					<td scope="row">{$ART.ATTRIBUTE.D['Title'].LANGUAGE.D['DE'].Value}</td>
 					<td scope="row">{$ART['ParentId']}</td>
 					<td scope="row">{count((array)$D.ARTICLE['ParentId'].D[$kART].ARTICLE.D)}</td>
-					<td scope="row"><a href="?R[Page]=admin__article.edit&R[ModuleId]=papp/shop&D[_ID]={$kART}">edit</a></td>
+					<td scope="row"><a href="?R[Page]=admin__article.edit&R[ModuleId]=fremeo/shop&D[_ID]={$kART}">edit</a></td>
 				</tr>
 			{/foreach}
 			</tbody>
 		</table>
-		<button type="submit" class="btn btn-primary btn-sm">Save</button> <a href="?R[Page]=admin__article.edit&R[ModuleId]=papp/shop&R[ACTION]=new" class="btn btn-primary btn-sm">NEW</a>
+		<button type="submit" class="btn btn-primary btn-sm">Save</button> <a href="?R[Page]=admin__article.edit&R[ModuleId]=fremeo/shop&R[ACTION]=new" class="btn btn-primary btn-sm">NEW</a>
 	</form>
 {/block}

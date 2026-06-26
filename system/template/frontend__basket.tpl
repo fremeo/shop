@@ -78,7 +78,7 @@
 				<button type="button" class="btn btn-warning" onclick="wp.ajax({ 'url' : '{$D.BasePath}io?D[ACTION]=send_basket2Mail', 'data' : $('form').serialize() }); alert('Vielen Dank für Ihre Anfrage, wir werden uns bei Ihen dann melden.');location.href = '{$D.BasePath}'; ">Anfragen</button>
 				*}
 				<div class="text-end">
-					<a href="?R[Page]=frontend__checkout_step1&R[ModuleId]=papp/shop" class="btn btn-warning btn-outline-primery">Zur Kasse</a>
+					<a href="?R[Page]=frontend__checkout_step1&R[ModuleId]=fremeo/shop" class="btn btn-warning btn-outline-primery">Zur Kasse</a>
 				</div>
 				{else}
 					<div class="alert alert-danger" role="alert">Bitte fügen Sie Artikel dem Warenkorb hinzu!</div>

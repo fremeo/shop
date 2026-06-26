@@ -18,7 +18,7 @@
 			<tr>
 				<td>{$smarty.foreach.D.iteration}</td>
 				<td>{$D.DateTime|date_format:"%d.%m.%Y %H:%M"}</td>
-				<td><a href="?R[Page]=account__order.details&R[ModuleId]=papp/shop&R[OrderId]={$kD}">{$kD}|{$D.Number}</a></td>
+				<td><a href="?R[Page]=account__order.details&R[ModuleId]=fremeo/shop&R[OrderId]={$kD}">{$kD}|{$D.Number}</a></td>
 				<td>{$_Sum_Price+0} €</td>
 				<td>Offen</td>
 			</tr>

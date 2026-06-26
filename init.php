@@ -6,7 +6,7 @@ include_once(__dir__."/system/core/CShop.php");
 
 /*
 #Erweiterung der Admin Module um eigene Templates und PHP Dateien	
-$D['MODUL']['D'][ 'papp/admin' ]['MODUL']['D'][ $D['MY']['Id'] ]['TEMPLATE'] = [
+$D['MODUL']['D'][ 'fremeo/admin' ]['MODUL']['D'][ $D['MY']['Id'] ]['TEMPLATE'] = [
 	'tpl_dir' => __DIR__ . '/system/extend/templates/',
 	'php_dir' => __DIR__ . '/system/extend/',
 ];
@@ -174,7 +174,7 @@ $Pattern['ACCOUNT']['D']['ORDER']['D']['DELIVERY']['D']['ARTICLE'] = [ #Versende
 #$C['CData']->registerPattern($Pattern);
 
 
-$C['fremeo~shop']['CData'] = new \papp\CData( [ 'DB' => ['FILENAME' => PROJECT_ROOT.'data/fremeo~shop/data.db', 'FILENAME_C' => PROJECT_ROOT.'data_c/fremeo~shop/data.db' ] ] );
+$C['fremeo~shop']['CData'] = new \phploader\CData( [ 'DB' => ['FILENAME' => PROJECT_ROOT.'data/fremeo~shop/data.db', 'FILENAME_C' => PROJECT_ROOT.'data_c/fremeo~shop/data.db' ] ] );
 $C['fremeo~shop']['CData']->registerPattern($Pattern);
 
 $C['CShop'] = new CShop($C['fremeo~shop']['CData']);

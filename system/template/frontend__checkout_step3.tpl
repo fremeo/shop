@@ -26,7 +26,7 @@
         <!-- Main Content -->
         <div class="col-lg-8 mb-4">
 
-            <form action="?R[Page]=frontend__checkout_thankyou&R[ModuleId]=papp/shop" method="post" class="card">
+            <form action="?R[Page]=frontend__checkout_thankyou&R[ModuleId]=fremeo/shop" method="post" class="card">
                 <div class="card-body">
 
                     <!-- Anschrift -->
@@ -143,7 +143,7 @@
 
                 <!-- Button-Lösung (gesetzlich vorgeschrieben) -->
 				<div class="card-footer d-flex justify-content-between">
-                    <a href="?R[Page]=frontend__checkout_step2&R[ModuleId]=papp/shop" class="btn btn-outline-secondary">Zurück</a>
+                    <a href="?R[Page]=frontend__checkout_step2&R[ModuleId]=fremeo/shop" class="btn btn-outline-secondary">Zurück</a>
 {input p=['type' => 'hidden', 'name' => 'R[ACTION]', 'value'=> 'goCheckout']}
                     <button type="submit" class="btn btn-warning">
                         Kaufen

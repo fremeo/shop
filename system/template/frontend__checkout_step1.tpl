@@ -25,7 +25,7 @@
     <div class="row">
         <!-- Address Form -->
         <div class="col-lg-8 mb-4">
-            <form action="?R[Page]=frontend__checkout_step2&R[ModuleId]=papp/shop" method="post" class="card">
+            <form action="?R[Page]=frontend__checkout_step2&R[ModuleId]=fremeo/shop" method="post" class="card">
                 <div class="card-body">
 
                     <!-- Rechnungsadresse -->

@@ -1,4 +1,4 @@
 <?php
 $F['ACCOUNT']['CUSTOMER'] = [];
 $F['ACCOUNT']['ADDRESS'] = [];
-$C['papp~shop']['CData']->get_object($D,$F);
+$C['fremeo~shop']['CData']->get_object($D,$F);

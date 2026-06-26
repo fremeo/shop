@@ -29,7 +29,7 @@
         <!-- Main Content -->
         <div class="col-lg-8 mb-4">
 
-            <form action="?R[Page]=frontend__checkout_step3&R[ModuleId]=papp/shop" method="post" class="card">
+            <form action="?R[Page]=frontend__checkout_step3&R[ModuleId]=fremeo/shop" method="post" class="card">
                 <div class="card-body">
 
                     <!-- Versandarten -->
@@ -107,7 +107,7 @@
                 </div>
 
                 <div class="card-footer d-flex justify-content-between">
-                    <a href="?R[Page]=frontend__checkout_step1&R[ModuleId]=papp/shop" class="btn btn-outline-secondary">Zurück zur Anschrift</a>
+                    <a href="?R[Page]=frontend__checkout_step1&R[ModuleId]=fremeo/shop" class="btn btn-outline-secondary">Zurück zur Anschrift</a>
 {input p=['type' => 'hidden', 'name' => 'R[ACTION]', 'value'=> 'addToBasket']}
                     <button type="submit" class="btn btn-primary">
                         Weiter zu Prüfen &amp; Bestellen
