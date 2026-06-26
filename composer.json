@@ -2,8 +2,8 @@
     "name": "fremeo/shop",
     "description": "Shop",
     "license": "proprietary",
-    "type": "phpapp-module",
-    "keywords": ["phpapp", "phpapp-module", "shop"],
+    "type": "fremeo-module",
+    "keywords": ["fremeo", "fremeo-module", "shop"],
     "require": {
         "php": "^8.0",
         "phploader/smartylite": "^v4.5",
