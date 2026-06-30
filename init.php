@@ -174,10 +174,10 @@ $Pattern['ACCOUNT']['D']['ORDER']['D']['DELIVERY']['D']['ARTICLE'] = [ #Versende
 #$C['CData']->registerPattern($Pattern);
 
 
-$C['fremeo~shop']['CData'] = new \phploader\CData( [ 'DB' => ['FILENAME' => PROJECT_ROOT.'data/fremeo~shop/data.db', 'FILENAME_C' => PROJECT_ROOT.'data_c/fremeo~shop/data.db' ] ] );
-$C['fremeo~shop']['CData']->registerPattern($Pattern);
+$C['fremeo/shop']['CData'] = new \phploader\CData( [ 'DB' => ['FILENAME' => PROJECT_ROOT.'data/fremeo~shop/data.db', 'FILENAME_C' => PROJECT_ROOT.'data_c/fremeo~shop/data.db' ] ] );
+$C['fremeo/shop']['CData']->registerPattern($Pattern);
 
-$C['CShop'] = new CShop($C['fremeo~shop']['CData']);
+$C['CShop'] = new CShop($C['fremeo/shop']['CData']);
 /*
 $F['ATTRIBUTE_SET']['LANGUAGE'] = [];
 $F['ATTRIBUTE_SET']['ATTRIBUTE_GROUP']['LANGUAGE'] = [];
@@ -197,6 +197,6 @@ $F['ARTICLE']['STOCK'] = [];
 $F['ARTICLE']['CUSTOMERGROUP'] = [];
 $C['CData']->get_object($D1,$F); #Achtung: über diese Methode wurden Artikel Texte nicht ausgelesen!
 
-$C['fremeo~shop']['CData']->set_object($D1);
+$C['fremeo/shop']['CData']->set_object($D1);
 
 */

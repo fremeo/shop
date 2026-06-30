@@ -1,7 +1,7 @@
 <?php
 
 if(($D['ACTION']??null) == 'save') {
-	$C['fremeo~shop']['CData']->set_object($D); 
+	$C['fremeo/shop']['CData']->set_object($D); 
 }
 
 
@@ -11,6 +11,6 @@ $F['ARTICLE']['CUSTOMERGROUP'] = [];
 ##$C['CData']->get_object($D,$F);
 
 
-$C['fremeo~shop']['CData']->get_object($D,$F);
+$C['fremeo/shop']['CData']->get_object($D,$F);
 unset($F['ARTICLE']);
 

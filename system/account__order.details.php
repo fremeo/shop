@@ -4,4 +4,4 @@ $F['ACCOUNT']['ORDER']['W'][0]['ID'] = $R['OrderId']??null;
 $F['ACCOUNT']['ORDER']['ARTICLE'] = [];
 $F['ACCOUNT']['ORDER']['DELIVERY']['ARTICLE'] = [];
 
-$C['fremeo~shop']['CData']->get_object($D,$F);
+$C['fremeo/shop']['CData']->get_object($D,$F);

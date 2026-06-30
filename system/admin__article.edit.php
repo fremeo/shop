@@ -1,7 +1,7 @@
 <?php
 
 if(($D['ACTION']??null) == 'save') {
-	$C['fremeo~shop']['CData']->set_object($D);
+	$C['fremeo/shop']['CData']->set_object($D);
 }
 else if(($R['ACTION']??null) == 'new') {
 	$D['R']['Id'] = hash("crc32b", time());
@@ -16,6 +16,6 @@ $F['ARTICLE']['CUSTOMERGROUP'] = [];
 $F['ATTRIBUTE']['LANGUAGE'] = [];
 ###$C['CData']->get_object($D,$F);
 
-$C['fremeo~shop']['CData']->get_object($D,$F);
+$C['fremeo/shop']['CData']->get_object($D,$F);
 unset($F['ARTICLE']);
 unset($F['ATTRIBUTE']);
