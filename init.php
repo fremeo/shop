@@ -174,7 +174,10 @@ $Pattern['ACCOUNT']['D']['ORDER']['D']['DELIVERY']['D']['ARTICLE'] = [ #Versende
 #$C['CData']->registerPattern($Pattern);
 
 
-$C['fremeo/shop']['CData'] = new \phploader\CData( [ 'DB' => ['FILENAME' => PROJECT_ROOT.'data/fremeo~shop/data.db', 'FILENAME_C' => PROJECT_ROOT.'data_c/fremeo~shop/data.db' ] ] );
+#$C['fremeo/shop']['CData'] = new \phploader\CData( [ 'DB' => ['FILENAME' => PROJECT_ROOT.'data/fremeo~shop/data.db', 'FILENAME_C' => PROJECT_ROOT.'data_c/fremeo~shop/data.db' ] ] );
+if (!isset($C['fremeo/shop']['CData'])) {
+    $C->set('CData', new \phploader\CData( [ 'DB' => ['FILENAME' => PROJECT_ROOT.'data/fremeo~shop/data.db', 'FILENAME_C' => PROJECT_ROOT.'data_c/fremeo~shop/data.db' ] ] ), 'fremeo/shop');
+}
 $C['fremeo/shop']['CData']->registerPattern($Pattern);
 
 $C['CShop'] = new CShop($C['fremeo/shop']['CData']);
