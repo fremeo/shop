@@ -1,8 +1,8 @@
 <?php
-if($D['SEARCH']??null) {
+$search = trim((string)($D['SEARCH'] ?? ''));
+if($search !== '') {
 	$f['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['ID'] = ['Title','Sku','Description'];
 	
-	$search = trim($D['SEARCH']); # Beispiel: $D['SEARCH'] = "kugel ventil edelstahl";
 	$terms = preg_split('/\s+/', $search); # Suchbegriffe anhand von Leerzeichen trennen
 	$count = count($terms);
 	
@@ -11,7 +11,7 @@ if($D['SEARCH']??null) {
 	}
 	
 	#$f['ARTICLE']['W'][0]['ATTRIBUTE']['W'][0]['LANGUAGE']['W'][0]['Value']['LIKE%%'] = $D['SEARCH'];
-	$C['CData']->get_object($dSearch,$f);
+	$C['fremeo/shop']['CData']->get_object($dSearch,$f);
 	
 	#Filter agiere auf Parent und Kinder 
 	$F['ARTICLE']['W'][0]['ID'] = array_merge( array_keys((array)($dSearch['ARTICLE']['D']??[]))
