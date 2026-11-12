@@ -1,3 +1,14 @@
+#0.0.1 (unveroeffentlicht)
++ Admin-Account-Edit ueber Bearbeiten-Link: vorhandene Adressen bearbeiten/loeschen und Benutzerzuordnungen mit Core-Name/E-Mail anzeigen sowie accountbezogen aktivieren/deaktivieren; keine Neuanlage oder Pattern-Aenderungen, Bestellhistorie und Core-User bleiben unveraendert.
+~ Kundenlisten-Code vereinfacht: gemeinsame Feldwertepruefung, Account-IDs direkt aus Eingaben und einheitlicher Ladepfad fuer Pagination; bestehender Loeschschutz und Speichervalidierung bleiben erhalten.
+~ Allgemeine Bedienungsbeschreibung und Altbestandswarnung aus der Kundenliste entfernt; Eingabepruefung und Schutz ungueltiger IDs bleiben bestehen.
++ Admin-Kundenliste mit Kundennummer/Name, Kontaktadressen und Benutzer-/Merklisten-/Bestellzaehlern, Paging, deutschen Sprachvariablen und fester Speichern-/Abbrechen-Leiste ueberarbeitet.
+! Veraltete CUSTOMER-/Gruppen-/Company-Felder und falschen Edit-Link entfernt; Active-Aenderungen nur per POST validieren und speichern, Account-Pattern-Feldebene fuer Active/Name/Number nach Freigabe korrigiert.
++ Loeschmarkierung mit Bestaetigung fuer Accounts ohne Bestellungen; Core-User bleiben erhalten, Accounts mit Bestellungen auch serverseitig geschuetzt und nur ueber Aktiv-Haken deaktivierbar.
+~ Verbindliche Pflege des Shop-Konzepts bei jeder Konzeptanpassung und konzeptrelevanten Umsetzungsaenderung festgelegt und im Modul-Leitfaden verankert.
++ Shop-Konzept unter docs/Konzept_Shop.md dokumentiert: Core-Identitaeten, Shop-Accounts mit n:m-Mitgliedschaften, Adressen, Merklisten und Bestellhistorie; individuelle Rechte und Basket ausdruecklich zurueckgestellt.
+~ Datenbank-Pattern unveraendert nach system/default/default.pattern.php ausgelagert; init.php laedt und registriert das zurueckgegebene Array ohne gemeinsame Pattern-Variable.
+
 #0.0.0
 + Geburt
 
