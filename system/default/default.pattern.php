@@ -91,6 +91,7 @@ return [
 		'Active' => ['Type' => 'checkbox'],
 		'Name' => ['Type' => 'text'],
 		'Number' => ['Type' => 'text'],
+		'InvoiceAddressId' => ['Type' => 'id'],
 		'D' => [
 		'USER' => [
 			'Active' => ['Type' => 'checkbox'],

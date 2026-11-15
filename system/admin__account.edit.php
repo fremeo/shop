@@ -22,11 +22,12 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($D['ACTION'] ?? null) === 
 	$accountUpdate = [];
 	if (!is_array($accountPosted) || array_diff(array_keys($accountPosted), [$accountId])
 		|| !is_array($accountPosted[$accountId] ?? [])
-		|| array_diff(array_keys($accountPosted[$accountId] ?? []), ['ADDRESS', 'USER'])) {
+		|| array_diff(array_keys($accountPosted[$accountId] ?? []), ['ADDRESS', 'USER', 'InvoiceAddressId'])) {
 		$R['AccountEdit']['Error'] = 'account_edit_error_data';
 	} else {
 		$accountPattern = (static fn (string $file): array => include $file)(__DIR__ . '/default/default.pattern.php');
 		foreach ($accountPosted[$accountId] ?? [] as $accountType => $accountChildren) {
+			if ($accountType === 'InvoiceAddressId') continue;
 			if (!is_array($accountChildren) || array_diff(array_keys($accountChildren), ['D'])
 				|| !is_array($accountChildren['D'] ?? [])) {
 				$R['AccountEdit']['Error'] = 'account_edit_error_data';
@@ -54,6 +55,39 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && ($D['ACTION'] ?? null) === 
 					unset($accountRow['__DELETE__']);
 					if ($accountRow) $accountUpdate['ACCOUNT']['D'][$accountId][$accountType]['D'][$accountChildId] = $accountRow;
 				}
+			}
+		}
+		if (!$R['AccountEdit']['Error'] && array_key_exists('InvoiceAddressId', $accountPosted[$accountId] ?? [])) {
+			$invoiceAddressId = $accountPosted[$accountId]['InvoiceAddressId'];
+			$currentInvoiceAddressId = isset($D['ACCOUNT']['D'][$accountId]['InvoiceAddressId'])
+				? (string)$D['ACCOUNT']['D'][$accountId]['InvoiceAddressId'] : null;
+			$invoiceAddress = null;
+			$invoiceAddressBeingDeleted = false;
+			$invoiceAddressBeingDisabled = false;
+			if (is_string($invoiceAddressId)) {
+				$invoiceAddress = $D['ACCOUNT']['D'][$accountId]['ADDRESS']['D'][$invoiceAddressId] ?? null;
+				$postedInvoiceAddress = $accountPosted[$accountId]['ADDRESS']['D'][$invoiceAddressId] ?? [];
+				$invoiceAddressBeingDeleted = !empty($postedInvoiceAddress['__DELETE__']);
+				$invoiceAddressBeingDisabled = array_key_exists('Active', $postedInvoiceAddress)
+					&& in_array($postedInvoiceAddress['Active'], [0, '0'], true);
+			}
+			if (!is_string($invoiceAddressId) || !preg_match('/^[A-Za-z0-9_-]+$/D', $invoiceAddressId)
+				|| !is_array($invoiceAddress) || $invoiceAddressBeingDeleted
+				|| ($invoiceAddressId !== $currentInvoiceAddressId
+					&& (empty($invoiceAddress['Active']) || $invoiceAddressBeingDisabled))) {
+				$R['AccountEdit']['Error'] = 'account_edit_error_data';
+			} else {
+				$accountUpdate['ACCOUNT']['D'][$accountId]['InvoiceAddressId'] = $invoiceAddressId;
+			}
+		}
+		if (!$R['AccountEdit']['Error']) {
+			$currentInvoiceAddressId = isset($D['ACCOUNT']['D'][$accountId]['InvoiceAddressId'])
+				? (string)$D['ACCOUNT']['D'][$accountId]['InvoiceAddressId'] : null;
+			$currentInvoiceAddressDeleted = $currentInvoiceAddressId !== null
+				&& isset($accountPosted[$accountId]['ADDRESS']['D'][$currentInvoiceAddressId]['__DELETE__'])
+				&& !empty($accountPosted[$accountId]['ADDRESS']['D'][$currentInvoiceAddressId]['__DELETE__']);
+			if ($currentInvoiceAddressDeleted && !isset($accountUpdate['ACCOUNT']['D'][$accountId]['InvoiceAddressId'])) {
+				$R['AccountEdit']['Error'] = 'account_edit_error_data';
 			}
 		}
 	}

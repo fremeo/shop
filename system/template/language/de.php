@@ -27,6 +27,12 @@ return [
 	'admin__account.edit' => [
 		'account_edit_title' => 'Kundenkonto bearbeiten',
 		'account_edit_addresses' => 'Adressen',
+		'account_edit_address' => 'Adresse',
+		'account_edit_invoice_default' => 'Rechnungsadresse',
+		'account_edit_invoice_select' => 'Als Rechnungsadresse auswählen',
+		'account_edit_invoice_inactive' => 'Aktuell gewählt (inaktiv)',
+		'account_edit_invoice_hint' => 'Als Rechnungsadresse können nur aktive Adressen neu ausgewählt werden. Eine deaktivierte, bereits ausgewählte Rechnungsadresse bleibt bestehen, bis eine andere aktive Adresse gewählt wird.',
+		'account_edit_edit_address' => 'Bearbeiten',
 		'account_edit_first_name' => 'Vorname',
 		'account_edit_last_name' => 'Nachname',
 		'account_edit_street' => 'Straße',

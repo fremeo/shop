@@ -173,9 +173,17 @@ Mitgliedschaftsverwaltung oder individuellen User-Rechte und keinen Basket.
 gemaess unveraendertem Pattern:
 
 - Account-ID, Name und Kundennummer werden nur angezeigt.
-- Alle zu diesem Account gehoerenden Adressen werden angezeigt, auch inaktive.
-  Editierbar sind `Active`, `FName`, `LName`, `Street`, `HNumber`, `Postcode`,
-  `City`, `CountryId`, `Phone` und `Mail`.
+- Alle zu diesem Account gehoerenden Adressen werden in einer kompakten Liste
+  angezeigt, auch inaktive. Aktivstatus und Standard-Rechnungsadresse werden
+  direkt in der Liste bedient. Die vollstaendigen Felder einer Adresse werden
+  bei Bedarf inline aufgeklappt. Editierbar sind `Active`, `FName`, `LName`,
+  `Street`, `HNumber`, `Postcode`, `City`, `CountryId`, `Phone` und `Mail`.
+- Die Standard-Rechnungsadresse wird im Account-Feld `InvoiceAddressId`
+  gespeichert. Nur aktive Adressen koennen neu ausgewaehlt werden. Wird die
+  aktuell ausgewaehlte Adresse deaktiviert, bleibt sie Rechnungsadresse, bis
+  eine andere aktive Adresse gewaehlt wird. Eine ausgewaehlte Rechnungsadresse
+  kann nur geloescht werden, wenn beim selben Speichern eine andere aktive
+  Rechnungsadresse ausgewaehlt wird.
 - Adressen koennen nach Bestaetigung zum Loeschen markiert werden.
   Erst Speichern entfernt die Adresse. Bestelldaten und dort gespeicherte
   historische Adressen bleiben unveraendert.

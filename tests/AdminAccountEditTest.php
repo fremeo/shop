@@ -28,6 +28,7 @@ class AdminAccountEditTest extends TestCase {
 		$data = ['ACCOUNT' => ['D' => [
 			'company' => [
 				'Active' => 1, 'Name' => 'Firma <A>', 'Number' => '100',
+				'InvoiceAddressId' => 'office',
 				'ADDRESS' => ['D' => [
 					'office' => ['Active' => 1, 'FName' => 'Anna', 'LName' => 'Muster', 'Street' => 'Straße', 'City' => 'Berlin', 'Mail' => '"<mail>'],
 					'inactive' => ['Active' => 0, 'City' => 'Bonn'],
@@ -105,13 +106,67 @@ class AdminAccountEditTest extends TestCase {
 	}
 
 	public function testAddressDeletionPreservesHistoricalOrderAddresses(): void {
-		$data = $this->page(['company' => ['ADDRESS' => ['D' => ['office' => ['__DELETE__' => 1, 'City' => 'ignored']]]]], 'POST');
+		$updates = ['ACCOUNT' => ['D' => ['company' => [
+			'ADDRESS' => ['D' => ['warehouse' => ['Active' => 1, 'City' => 'Hamburg']]],
+		]]]];
+		$this->C['fremeo/shop']['CData']->set_object($updates);
+		$data = $this->page(['company' => [
+			'InvoiceAddressId' => 'warehouse',
+			'ADDRESS' => ['D' => ['office' => ['__DELETE__' => 1, 'City' => 'ignored']]],
+		]], 'POST');
 		$this->assertTrue($data['R']['AccountEdit']['Saved']);
 		$this->assertArrayNotHasKey('office', $data['ACCOUNT']['D']['company']['ADDRESS']['D']);
 		$filter = ['ACCOUNT' => ['W' => [['ID' => 'company']], 'ORDER' => []]];
 		$saved = null;
 		$this->C['fremeo/shop']['CData']->get_object($saved, $filter);
 		$this->assertSame('Alte Straße', $saved['ACCOUNT']['D']['company']['ORDER']['D']['order']['Street']);
+	}
+
+	public function testInvoiceAddressCanBeChangedAndRemainsSelectedWhenDeactivated(): void {
+		$updates = ['ACCOUNT' => ['D' => ['company' => [
+			'ADDRESS' => ['D' => ['warehouse' => ['Active' => 1, 'City' => 'Hamburg']]],
+		]]]];
+		$this->C['fremeo/shop']['CData']->set_object($updates);
+		$data = $this->page(['company' => ['InvoiceAddressId' => 'warehouse']], 'POST');
+		$this->assertTrue($data['R']['AccountEdit']['Saved']);
+		$this->assertSame('warehouse', $data['ACCOUNT']['D']['company']['InvoiceAddressId']);
+
+		$data = $this->page(['company' => [
+			'InvoiceAddressId' => 'warehouse',
+			'ADDRESS' => ['D' => ['warehouse' => ['Active' => '0']]],
+		]], 'POST');
+		$this->assertTrue($data['R']['AccountEdit']['Saved']);
+		$this->assertSame('warehouse', $data['ACCOUNT']['D']['company']['InvoiceAddressId']);
+		$this->assertSame(0, (int)$data['ACCOUNT']['D']['company']['ADDRESS']['D']['warehouse']['Active']);
+
+		$data = $this->page(['company' => ['ADDRESS' => ['D' => ['warehouse' => ['City' => 'Bremen']]]]], 'POST');
+		$this->assertTrue($data['R']['AccountEdit']['Saved']);
+		$this->assertSame('warehouse', $data['ACCOUNT']['D']['company']['InvoiceAddressId']);
+	}
+
+	public function testInvoiceAddressSelectionRejectsInactiveForeignAndMissingAddresses(): void {
+		foreach (['inactive', 'foreign', 'missing', ['invalid']] as $invoiceAddressId) {
+			$data = $this->page(['company' => ['InvoiceAddressId' => $invoiceAddressId]], 'POST');
+			$this->assertSame('account_edit_error_data', $data['R']['AccountEdit']['Error']);
+			$this->assertFalse($data['R']['AccountEdit']['Saved']);
+			$this->assertSame('office', $data['ACCOUNT']['D']['company']['InvoiceAddressId']);
+		}
+	}
+
+	public function testDeletingInvoiceAddressRequiresSelectingAnotherActiveAddress(): void {
+		$updates = ['ACCOUNT' => ['D' => ['company' => [
+			'ADDRESS' => ['D' => ['warehouse' => ['Active' => 1, 'City' => 'Hamburg']]],
+		]]]];
+		$this->C['fremeo/shop']['CData']->set_object($updates);
+		$deleteAddress = ['ADDRESS' => ['D' => ['office' => ['__DELETE__' => 1]]]];
+		$data = $this->page(['company' => $deleteAddress], 'POST');
+		$this->assertSame('account_edit_error_data', $data['R']['AccountEdit']['Error']);
+		$this->assertArrayHasKey('office', $data['ACCOUNT']['D']['company']['ADDRESS']['D']);
+
+		$data = $this->page(['company' => $deleteAddress + ['InvoiceAddressId' => 'warehouse']], 'POST');
+		$this->assertTrue($data['R']['AccountEdit']['Saved']);
+		$this->assertSame('warehouse', $data['ACCOUNT']['D']['company']['InvoiceAddressId']);
+		$this->assertArrayNotHasKey('office', $data['ACCOUNT']['D']['company']['ADDRESS']['D']);
 	}
 
 	public function testInvalidUpdatesAreRejectedAsAWholeWithoutCreatingRecords(): void {
@@ -195,6 +250,14 @@ class AdminAccountEditTest extends TestCase {
 
 	#[\PHPUnit\Framework\Attributes\WithoutErrorHandler]
 	public function testTemplateRendersSecureEscapedInputsAndExternalFooterActions(): void {
+		$manyAddresses = [];
+		for ($i = 1; $i <= 100; $i++) {
+			$manyAddresses['bulk' . $i] = ['Active' => 1, 'FName' => 'Contact ' . $i, 'City' => 'City ' . $i];
+		}
+		$updates = ['ACCOUNT' => ['D' => ['company' => [
+			'ADDRESS' => ['D' => $manyAddresses],
+		]]]];
+		$this->C['fremeo/shop']['CData']->set_object($updates);
 		$data = $this->page();
 		$this->C->set('Security', new Security());
 		$data['C'] = $this->C;
@@ -218,12 +281,17 @@ class AdminAccountEditTest extends TestCase {
 			$document = new \DOMDocument();
 			$document->loadHTML('<?xml encoding="UTF-8">' . $html);
 			$xpath = new \DOMXPath($document);
-			$this->assertSame(2, $xpath->query('//fieldset[@data-address-id]')->length);
-			$this->assertSame(18, $xpath->query('//fieldset//input[@type="text"]')->length);
+			$this->assertSame(102, $xpath->query('//tr[@data-address-id]')->length);
+			$this->assertSame(102, $xpath->query('//tr[@data-address-id]/td//details[not(@open)]')->length);
+			$this->assertSame(918, $xpath->query('//tr[@data-address-id]//input[@type="text"]')->length);
+			$this->assertSame(102, $xpath->query('//tr[@data-address-id]//input[@type="radio"]')->length);
+			$this->assertSame(1, $xpath->query('//tr[@data-address-id="inactive"]//input[@type="radio"][@disabled]')->length);
+			$this->assertSame(1, $xpath->query('//tr[@data-address-id="office"]//input[@type="radio"][@checked]')->length);
+			$this->assertSame(102, $xpath->query('//tr[@data-address-id]//input[@type="checkbox"]')->length);
 			$this->assertSame(3, $xpath->query('//tr[@data-user-id]')->length);
 			$this->assertSame(1, $xpath->query('//button[@form="accountEditForm"][@type="submit"]')->length);
 			$this->assertSame(0, $xpath->query('//form//button[@type="submit"]')->length);
-			$this->assertSame(2, $xpath->query('//input[@data-address-delete][@disabled]')->length);
+			$this->assertSame(102, $xpath->query('//input[@data-address-delete][@disabled]')->length);
 			$this->assertSame(0, $xpath->query('//input[starts-with(@name,"D[")]')->length);
 			$this->assertSame('"<mail>', $xpath->query('//input[@id="account-address-office-Mail"]')->item(0)->getAttribute('value'));
 			$this->assertStringContainsString('Firma &lt;A&gt;', $html);
@@ -232,6 +300,7 @@ class AdminAccountEditTest extends TestCase {
 			$this->assertStringNotContainsString('must-not-leak', $html);
 			$this->assertContains('D[ACCOUNT][D][company][USER][D][employee][Active]', $_SESSION['Security']['Map']);
 			$this->assertContains('D[ACCOUNT][D][company][ADDRESS][D][office][__DELETE__]', $_SESSION['Security']['Map']);
+			$this->assertContains('D[ACCOUNT][D][company][InvoiceAddressId]', $_SESSION['Security']['Map']);
 		} finally {
 			libxml_clear_errors();
 			libxml_use_internal_errors($previous);
