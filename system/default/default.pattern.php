@@ -89,12 +89,14 @@ return [
 	],
 	'ACCOUNT' => [
 		'Active' => ['Type' => 'checkbox'],
+		'UserId' => ['Type' => 'id'],	# Master user ID for the account
 		'Name' => ['Type' => 'text'],
 		'Number' => ['Type' => 'text'],
 		'InvoiceAddressId' => ['Type' => 'id'],
 		'D' => [
 		'USER' => [
 			'Active' => ['Type' => 'checkbox'],
+			'Role' => ['Type' => 'text'],	# admin, user
 		],
 		'ADDRESS' => [
 			'Active' => ['Type' => 'checkbox'],

@@ -1,4 +1,7 @@
 #0.0.1 (unveroeffentlicht)
+~ Adressformulare auf direkte D-Datenpfade und R[Action]=save umgestellt; Aktivstatus per Checkbox, neue Adress-IDs als dezimaler CRC32 aus Millisekunden-Zeitstempel.
+~ Adresspflege vereinfacht: Pattern-Feldfilterung durch CData, Pflichtfeldhinweise im Formular; bestehende Kontogrenzen und Schutz der Standard-Rechnungsadresse bleiben erhalten.
++ Frontend-Adressverwaltung mit Anlegen, Bearbeiten, Aktivstatus, Standard-Rechnungsadresse und Loeschmarkierung; Zugriff nur bei aktivem Shop-Account und aktiver Mitgliedschaft. Bestelladressen bleiben unveraendert.
 + Admin-Account-Edit ueber Bearbeiten-Link: vorhandene Adressen bearbeiten/loeschen und Benutzerzuordnungen mit Core-Name/E-Mail anzeigen sowie accountbezogen aktivieren/deaktivieren; keine Neuanlage oder Pattern-Aenderungen, Bestellhistorie und Core-User bleiben unveraendert.
 ~ Kundenlisten-Code vereinfacht: gemeinsame Feldwertepruefung, Account-IDs direkt aus Eingaben und einheitlicher Ladepfad fuer Pagination; bestehender Loeschschutz und Speichervalidierung bleiben erhalten.
 ~ Allgemeine Bedienungsbeschreibung und Altbestandswarnung aus der Kundenliste entfernt; Eingabepruefung und Schutz ungueltiger IDs bleiben bestehen.

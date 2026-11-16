@@ -1,6 +1,6 @@
 # Konzept: Shop-Kundenkonten und Benutzer
 
-Status: Fachliches Zielkonzept mit Admin-Kundenliste und begrenzter Account-Edit-Seite.
+Status: Fachliches Zielkonzept mit Admin-Kundenliste, begrenzter Account-Edit-Seite und Frontend-Adressverwaltung.
 Dieses Dokument beschreibt die vereinbarte Trennung zwischen Core-Benutzern
 und Shop-Kundenkonten. Nur die unter Umsetzungsstand genannten Funktionen
 sind bereits umgesetzt; der uebrige Text bleibt Zielkonzept.
@@ -217,6 +217,29 @@ Individuelle Mitgliedsrechte und Basket werden weiterhin nicht umgesetzt.
 Adressen gehoeren zum jeweiligen Account. Mehrere Rechnungs- und
 Lieferadressen sind moeglich; deren konkrete Kennzeichnung wird bei der
 spaeteren Umsetzung festgelegt.
+
+### Umsetzungsstand: Frontend-Adressverwaltung
+
+- `account__address` verwaltet Adressen des aktiven Shop-Accounts nur fuer
+  angemeldete User mit aktiver Shop-Mitgliedschaft. Fehlende Accounts und
+  Zuordnungen werden nicht automatisch angelegt.
+- Adressen koennen angelegt, bearbeitet, aktiviert und deaktiviert werden.
+  Der Aktivstatus wird per Checkbox und Speichern geaendert. Neue Adressen
+  erhalten eine kollisionsgepruefte dezimale CRC32-ID aus dem Zeitstempel in
+  Millisekunden und sind aktiv; Vorname, Nachname, Strasse, Hausnummer, PLZ, Ort
+  und Laendercode sind im Formular als Pflichtfelder markiert. Telefon und
+  E-Mail sind optional. CData prueft derzeit keine Pflichtfelder; direkte
+  Anfragen koennen die Formularvalidierung umgehen.
+- Aktive Adressen koennen als Standard-Rechnungsadresse ausgewaehlt werden.
+  Ein bestehender Standard bleibt bei Deaktivierung erhalten. Vor dessen
+  Loeschung muss bei vorhandener anderer aktiver Adresse ein anderer Standard
+  gewaehlt werden; andernfalls wird der Verweis beim Loeschen entfernt.
+- Loeschen wird nach Bestaetigung vorgemerkt und erst beim Speichern ausgefuehrt.
+  Historische Rechnungs- und Lieferadressen bleiben unveraendert.
+- Formulare uebertragen Adress- und Standardwerte direkt im `D`-Datenbaum;
+  `R[Action]=save` kennzeichnet den Speichervorgang.
+- Die Auswahl von Rechnungs- und Lieferadressen bei Bestellungen ist weiterhin
+  nicht Bestandteil dieser Umsetzung.
 
 Jeder User kann eigene benannte Memo-/Wunschlisten innerhalb eines Accounts
 anlegen. `OwnerUserId` kennzeichnet den Ersteller beziehungsweise Eigentuemer;
